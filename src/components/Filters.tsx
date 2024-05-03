@@ -1,36 +1,41 @@
-import { Box, Icon, Input, InputGroup, InputLeftElement } from '@chakra-ui/react';
-import { useState } from 'react'; // Importe o useState
-import SearchIcon from './icons/SearchIcon';
+import {
+    HStack,
+    Icon,
+    Input,
+    InputGroup,
+    InputLeftElement,
+} from "@chakra-ui/react";
+import SearchIcon from "./icons/SearchIcon";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Filters = ({ columnFilters, setColumnFilters }) => {
-    const [filterValue, setFilterValue] = useState('');
+    const productName = columnFilters.find((f) => f.id === "productName")?.value || "";
 
-    const onFilterChange = (value) => {
-        setFilterValue(value);
+    const onFilterChange = (id, value) =>
         setColumnFilters((prev) =>
-            prev.map((filter) => {
-                if (filter.id === "productName" || filter.id === "portfolioProductId") {
-                    return { ...filter, value };
-                }
-                return filter;
-            })
+            prev
+                .filter((f) => f.id !== id)
+                .concat({
+                    id,
+                    value,
+                })
         );
-    };
-
 
     return (
-        <Box mb={6}>
-            <InputGroup size="sm" maxW={"13rem"}>
-                <InputLeftElement pointerEvents={'none'}>
+        <HStack mb={6} spacing={3}>
+            <InputGroup size="sm" maxW="12rem">
+                <InputLeftElement pointerEvents="none">
                     <Icon as={SearchIcon} />
                 </InputLeftElement>
-                <Input type='text' variant="filled" placeholder='Nome ou ID' borderRadius={5}
-                    value={filterValue} onChange={(e) => onFilterChange(e.target.value)}
+                <Input
+                    type="text"
+                    variant="filled"
+                    placeholder="Filtrar pelo nome"
+                    borderRadius={5}
+                    value={productName}
+                    onChange={(e) => onFilterChange("productName", e.target.value)}
                 />
             </InputGroup>
-        </Box>
+        </HStack>
     );
 };
-
 export default Filters;
