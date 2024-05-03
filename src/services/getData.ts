@@ -4,6 +4,8 @@ async function getData() {
         if (!response.ok) {
             throw new Error(`Houve um problema ao tentar conexão com a API: ${response.status} ${response.statusText}`)
         }
+
+        return await response.json()
     } catch (error) {
         throw new Error('Houve um problema ao tentar conexão com a API')
     }
