@@ -1,8 +1,10 @@
-import { Box } from "@chakra-ui/react"
+import { Box, Icon } from "@chakra-ui/react"
 import { useEffect, useState } from "react"
 import { getData } from "../services/getData";
-import { flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
+import { flexRender, getCoreRowModel, getFilteredRowModel, getSortedRowModel, useReactTable } from "@tanstack/react-table";
 import Cell from "./Cell";
+import Filters from "./Filters";
+import SortIcon from "./icons/SortIcon";
 
 
 interface Product {
@@ -15,6 +17,7 @@ interface Product {
 const Table = () => {
 
     const [products, setProducts] = useState<Product[]>([])
+    const [columnFilters, setColumnFilters] = useState([])
 
     useEffect(() => {
         const fetchData = async () => {
@@ -49,6 +52,7 @@ const Table = () => {
         {
             accessorKey: 'correctedQuota',
             header: "Cota Corrigida",
+            size: 170,
             cell: Cell
         },
         {
@@ -61,25 +65,37 @@ const Table = () => {
     const tabela = useReactTable({
         data: products,
         columns,
+        state: {
+            columnFilters
+        },
         getCoreRowModel: getCoreRowModel(),
+        getFilteredRowModel: getFilteredRowModel(),
+        getSortedRowModel: getSortedRowModel(),
         columnResizeMode: "onChange"
     })
 
     return (
         <Box className="container">
+            <Filters
+                columnFilters={columnFilters}
+                setColumnFilters={setColumnFilters}
+            />
             <Box className="table" w={tabela.getTotalSize()}>
                 {tabela.getHeaderGroups().map((headerGroup) =>
                     <tr key={headerGroup.id} className="tr">
                         {headerGroup.headers.map((header) =>
                             <Box key={header.id} className="th" w={header.getSize()}>
                                 {header.column.columnDef.header}
+                                {
+                                    header.column.getCanSort() &&
+                                    <Icon as={SortIcon} mx={3} fontSize={14} onClick={header.column.getToggleSortingHandler()} />
+                                }
                                 <div
-                                    onTouchStart={header.getResizeHandler()}
                                     onMouseDown={header.getResizeHandler()}
-                                    className={
-                                        `resizer ${header.column.getIsResizing() ? "isResizing" : ""
-                                        }`
-                                    } />
+                                    onTouchStart={header.getResizeHandler()}
+                                    className={`resizer ${header.column.getIsResizing() ? "isResizing" : ""
+                                        }`}
+                                />
                             </Box>
                         )}
                     </tr>
