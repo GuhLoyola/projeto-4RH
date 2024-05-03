@@ -1,30 +1,23 @@
-# React + TypeScript + Vite
+# Projeto 4RH
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este foi um projeto desenvolvido a partir do teste tecnico da 4RH.
 
-Currently, two official plugins are available:
+Consiste em ser uma tabela que lista os dados de uma API Rest e nos permite fazer algumas funções (tal como filtrar a tabela pelo nome / id, e ordenar os valores ao clicar no botão ao lado do nome da coluna):
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Gif de exemplo
 
-## Expanding the ESLint configuration
+<img src='./public/gif/gifDemo.gif' width=500px>
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Tecnologias
 
-- Configure the top-level `parserOptions` property like this:
+<ul>
+  <li>TypeScript</li>
+  <li>React</li>
+</ul>
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+### Melhorias futuras
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+<ul>
+  <li>Tornar a tabela responsiva para dispositivos móveis</li>
+  <li>Conseguir hospedar o site na vercel para a obtenção do Live URL</li>
+</ul>
