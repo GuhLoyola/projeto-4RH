@@ -17,7 +17,7 @@ interface Product {
 const Table = () => {
 
     const [products, setProducts] = useState<Product[]>([])
-    const [columnFilters, setColumnFilters] = useState([])
+    const [filtering, setFiltering] = useState('')
 
     useEffect(() => {
         const fetchData = async () => {
@@ -26,8 +26,6 @@ const Table = () => {
                 const productData = await response.data.dailyEquityByPortfolioChartData
 
                 setProducts(productData)
-
-                console.log(productData)
 
             } catch (error) {
                 throw new Error('Houve um problema ao listar os dados')
@@ -66,8 +64,9 @@ const Table = () => {
         data: products,
         columns,
         state: {
-            columnFilters
+            globalFilter: filtering
         },
+        onGlobalFilterChange: setFiltering,
         getCoreRowModel: getCoreRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
         getSortedRowModel: getSortedRowModel(),
@@ -75,11 +74,12 @@ const Table = () => {
     })
 
     return (
-        <Box className="container">
+        <Box className="container" >
             <Filters
-                columnFilters={columnFilters}
-                setColumnFilters={setColumnFilters}
+                filtering={filtering}
+                setFiltering={setFiltering}
             />
+
             <Box className="table" w={tabela.getTotalSize()}>
                 {tabela.getHeaderGroups().map((headerGroup) =>
                     <tr key={headerGroup.id} className="tr">

@@ -7,18 +7,8 @@ import {
 } from "@chakra-ui/react";
 import SearchIcon from "./icons/SearchIcon";
 
-const Filters = ({ columnFilters, setColumnFilters }) => {
-    const productName = columnFilters.find((f) => f.id === "productName")?.value || "";
+const Filters = ({ filtering, setFiltering }) => {
 
-    const onFilterChange = (id, value) =>
-        setColumnFilters((prev) =>
-            prev
-                .filter((f) => f.id !== id)
-                .concat({
-                    id,
-                    value,
-                })
-        );
 
     return (
         <HStack mb={6} spacing={3}>
@@ -29,10 +19,10 @@ const Filters = ({ columnFilters, setColumnFilters }) => {
                 <Input
                     type="text"
                     variant="filled"
-                    placeholder="Filtrar pelo nome"
+                    placeholder="Filtrar por Nome / ID"
                     borderRadius={5}
-                    value={productName}
-                    onChange={(e) => onFilterChange("productName", e.target.value)}
+                    value={filtering}
+                    onChange={e => setFiltering(e.target.value)}
                 />
             </InputGroup>
         </HStack>
