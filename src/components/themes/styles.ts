@@ -8,6 +8,9 @@ const styles = {
             alignItems: "center",
             height: "100vh"
         },
+        svg: {
+            cursor: "pointer"
+        },
         ".table": {
             border: "1px solid #424242",
         },
