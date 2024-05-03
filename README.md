@@ -19,5 +19,4 @@ Consiste em ser uma tabela que lista os dados de uma API Rest e nos permite faze
 
 <ul>
   <li>Tornar a tabela responsiva para dispositivos móveis</li>
-  <li>Conseguir hospedar o site na vercel para a obtenção do Live URL</li>
 </ul>
